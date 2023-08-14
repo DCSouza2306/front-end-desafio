@@ -13,4 +13,6 @@ const PainelDiv = styled.div`
  flex-direction: column;
  align-items: center;
  padding: 48px 96px;
+ overflow-y: scroll;
+ overflow-x: hidden;
 `;

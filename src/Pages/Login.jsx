@@ -25,9 +25,6 @@ export function Login() {
     console.log(error)
   }
  }
- const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
- };
  return (
   <>
    <Background>

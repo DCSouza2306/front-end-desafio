@@ -2,23 +2,34 @@ import { styled } from "styled-components";
 import logo from "../assets/images/logo.png";
 import Search from "antd/es/input/Search";
 import { ConfigProvider } from "antd";
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import UserContext from "../context/userContext";
-import React from 'react';
+import { useCities, useIncludeCities } from "../hooks/api/useCities";
 
-export function Header() {
+export function Header({ reload, setReload }) {
  const [input, setInput] = useState("");
  const navigate = useNavigate();
  const userData = localStorage.getItem("userData");
+ const token = JSON.parse(userData)?.token;
+ const { includeCity } = useIncludeCities();
+ const { search } = useCities(token);
 
  function navigateLogin() {
   navigate("/login");
  }
 
- function logout(){
-    window.localStorage.clear();
-    navigate("/");
+ function logout() {
+  window.localStorage.clear();
+  navigate("/");
+ }
+
+ async function onSearch() {
+  const city = {
+   city: input,
+  };
+  await includeCity(city, token);
+  setInput("");
+  setReload(!reload);
  }
  return (
   <ConfigProvider
@@ -42,11 +53,12 @@ export function Header() {
      size="large"
      value={input}
      onChange={(e) => setInput(e.target.value)}
+     onSearch={onSearch}
     />
     {!userData ? (
      <p onClick={() => navigateLogin()}>Entrar/Cadastrar</p>
     ) : (
-        <p onClick={() => logout()} >Sair</p>
+     <p onClick={() => logout()}>Sair</p>
     )}
    </HeaderDiv>
   </ConfigProvider>

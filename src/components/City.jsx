@@ -23,7 +23,6 @@ export function City({
  const token = userData.token;
 
  const { deleteCities, deleteCitiesLoading } = useDeleteCities();
- console.log(deleteCitiesLoading);
  async function deleteSelected() {
   try {
    await deleteCities(token, id);

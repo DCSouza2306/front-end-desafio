@@ -4,23 +4,23 @@ import { Header } from "../components/Header";
 import { City } from "../components/City";
 import { useCities } from "../hooks/api/useCities";
 import { useEffect, useState } from "react";
-import { useDeleteCities } from "../hooks/api/useDeleteCity";
 
 export function Dashboard() {
  const userData = JSON.parse(localStorage.getItem("userData"));
  const token = userData.token;
  const [reload, setReload] = useState(false);
- const { deleteCitiesLoading } = useDeleteCities();
 
  useEffect(() => {
   search(token);
  }, [reload]);
+
  const { citiesData, search } = useCities(token);
+ setInterval(function (){search(token), setReload(!reload)}, 900000)
 
  return (
   <>
    <Background>
-    <Header />
+    <Header reload={reload} setReload={setReload} />
     <Painel>
      {citiesData?.map((e) => {
       return (

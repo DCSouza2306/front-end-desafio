@@ -18,14 +18,10 @@ export function SignUp() {
  async function onFinish (values) {
     try {
         await signUp(values);
-        console.log("funfou")
+        navigate("/login");
     } catch (error) {
         console.log(error)
     }
-  console.log("Success:", values);
- };
- const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
  };
  return (
   <>

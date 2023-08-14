@@ -16,3 +16,19 @@ export function useCities(token) {
   search,
  };
 }
+
+export function useIncludeCities() {
+ const {
+  data: includeCitiesData,
+  loading: includeCitiesLoading,
+  error: includeCitiesError,
+  task: includeCity,
+ } = useAsync(searchApi.includeCity, false);
+
+ return {
+  includeCitiesData,
+  includeCitiesLoading,
+  includeCitiesError,
+  includeCity,
+ };
+}
