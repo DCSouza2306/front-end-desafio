@@ -1,4 +1,4 @@
-# Desafio Arbitralis - Front-end
+# Meu Tempo - Front-end
 
 Acompanhe a previsão do tempo nas cidades de sua preferência
 
